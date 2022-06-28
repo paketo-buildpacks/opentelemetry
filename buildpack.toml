@@ -1,0 +1,47 @@
+api = "0.7"
+
+[buildpack]
+  description = "A Cloud Native Buildpack that contributes and configures the OpenTelemetry Agent"
+  homepage = "https://github.com/ThomasVitale/buildpacks-opentelemetry"
+  id = "paketo-buildpacks/opentelemetry"
+  keywords = ["java", "opentelemetry"]
+  name = "Paketo OpenTelemetry Buildpack"
+  sbom-formats = ["application/vnd.cyclonedx+json", "application/vnd.syft+json"]
+  version = "{{.version}}"
+
+  [[buildpack.licenses]]
+    type = "Apache-2.0"
+    uri = "https://github.com/ThomasVitale/buildpacks-opentelemetry/blob/main/LICENSE"
+
+[metadata]
+  include-files = ["LICENSE", "NOTICE", "README.md", "bin/build", "bin/detect", "bin/main", "buildpack.toml"]
+  pre-package = "scripts/build.sh"
+
+  [[metadata.configurations]]
+    build = true
+    default = "false"
+    description = "enable the OpenTelemetry Java Trace Agent"
+    name = "BP_OPENTELEMETRY_ENABLED"
+
+  [[metadata.dependencies]]
+    cpes = ["cpe:2.3:a:open-telemetry:opentelemetry-java-agent:1.15.0:*:*:*:*:*:*:*"]
+    id = "opentelemetry-java"
+    name = "OpenTelemetry Java Agent"
+    purl = "pkg:generic/opentelemetry-java@1.15.0"
+    sha256 = "1681dac7ba52de8859ef44c2295906b0038d0e6af8fc5163639492a027f24b2d"
+    stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
+    uri = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.15.0/opentelemetry-javaagent.jar"
+    version = "1.15.0"
+
+    [[metadata.dependencies.licenses]]
+      type = "Apache-2.0"
+      uri = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/LICENSE"
+
+[[stacks]]
+  id = "io.buildpacks.stacks.bionic"
+
+[[stacks]]
+  id = "io.paketo.stacks.tiny"
+
+[[stacks]]
+  id = "*"

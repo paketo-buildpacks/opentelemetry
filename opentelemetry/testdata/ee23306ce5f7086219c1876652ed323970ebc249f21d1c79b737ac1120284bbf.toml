@@ -1,0 +1,3 @@
+id = "opentelemetry-java"
+uri = "https://localhost/stub-opentelemetry-java-agent.jar"
+sha256 = "ee23306ce5f7086219c1876652ed323970ebc249f21d1c79b737ac1120284bbf"
