@@ -1,4 +1,4 @@
-# `Cloud Native Buildpacks - OpenTelemetry`
+# Cloud Native Buildpacks - OpenTelemetry
 
 The OpenTelemetry Buildpack is a Cloud Native Buildpack that contributes and configures the OpenTelemetry Agent.
 
@@ -53,6 +53,10 @@ The buildpack optionally accepts the following bindings:
 | Key                   | Value   | Description                                                                                       |
 | --------------------- | ------- | ------------------------------------------------------------------------------------------------- |
 | `<dependency-digest>` | `<uri>` | If needed, the buildpack will fetch the dependency with digest `<dependency-digest>` from `<uri>` |
+
+## References
+
+This buildpack is based on the same structure used by [Paketo Buildpacks](https://paketo.io).
 
 ## License
 
