@@ -7,7 +7,7 @@ api = "0.7"
   keywords = ["java", "opentelemetry"]
   name = "Paketo OpenTelemetry Buildpack"
   sbom-formats = ["application/vnd.cyclonedx+json", "application/vnd.syft+json"]
-  version = "{{.version}}"
+  version = "0.0.1"
 
   [[buildpack.licenses]]
     type = "Apache-2.0"
