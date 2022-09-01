@@ -3,7 +3,7 @@ module github.com/ThomasVitale/buildpacks-opentelemetry
 go 1.18
 
 require (
-	github.com/buildpacks/libcnb v1.26.0
+	github.com/buildpacks/libcnb v1.27.0
 	github.com/onsi/gomega v1.19.0
 	github.com/paketo-buildpacks/libpak v1.60.1
 	github.com/sclevine/spec v1.4.0
@@ -19,8 +19,8 @@ require (
 	github.com/mattn/go-isatty v0.0.8 // indirect
 	github.com/mitchellh/hashstructure/v2 v2.0.2 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
-	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
-	golang.org/x/sys v0.0.0-20220209214540-3681064d5158 // indirect
+	golang.org/x/net v0.0.0-20220708220712-1185a9018129 // indirect
+	golang.org/x/sys v0.0.0-20220712014510-0a85c31ab51e // indirect
 	golang.org/x/text v0.3.7 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
