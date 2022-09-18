@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-GOOS="linux" go build -ldflags='-s -w' -o bin/main github.com/ThomasVitale/buildpacks-opentelemetry/cmd/main
+GOOS="linux" go build -ldflags='-s -w' -o bin/main github.com/paketo-buildpacks/opentelemetry/cmd/main
 
 if [ "${STRIP:-false}" != "false" ]; then
   strip bin/main

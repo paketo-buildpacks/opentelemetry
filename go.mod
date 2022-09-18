@@ -1,4 +1,4 @@
-module github.com/ThomasVitale/buildpacks-opentelemetry
+module github.com/paketo-buildpacks/opentelemetry
 
 go 1.18
 

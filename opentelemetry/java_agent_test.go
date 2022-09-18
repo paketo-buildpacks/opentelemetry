@@ -24,11 +24,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/ThomasVitale/buildpacks-opentelemetry/opentelemetry"
 	"github.com/buildpacks/libcnb"
 	. "github.com/onsi/gomega"
 	"github.com/paketo-buildpacks/libpak"
 	"github.com/paketo-buildpacks/libpak/bard"
+	"github.com/paketo-buildpacks/opentelemetry/opentelemetry"
 	"github.com/sclevine/spec"
 )
 

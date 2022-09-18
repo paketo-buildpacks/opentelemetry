@@ -23,7 +23,7 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/sclevine/spec"
 
-	"github.com/ThomasVitale/buildpacks-opentelemetry/opentelemetry"
+	"github.com/paketo-buildpacks/opentelemetry/opentelemetry"
 )
 
 func testBuild(t *testing.T, context spec.G, it spec.S) {

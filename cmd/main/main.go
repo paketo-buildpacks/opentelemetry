@@ -3,9 +3,9 @@ package main
 import (
 	"os"
 
-	"github.com/ThomasVitale/buildpacks-opentelemetry/opentelemetry"
 	"github.com/paketo-buildpacks/libpak"
 	"github.com/paketo-buildpacks/libpak/bard"
+	"github.com/paketo-buildpacks/opentelemetry/opentelemetry"
 )
 
 func main() {
