@@ -14,27 +14,33 @@
  * limitations under the License.
  */
 
-package opentelemetry
+package main
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/buildpacks/libcnb"
+	"github.com/paketo-buildpacks/libpak/bard"
+	"github.com/paketo-buildpacks/libpak/sherpa"
 
-	"github.com/paketo-buildpacks/libpak/bindings"
+	"github.com/paketo-buildpacks/opentelemetry/helper"
 )
 
-const (
-	// BindingType is used to resolve bindings containing an OpenTelemetry configuration file for the Java Agent
-	BindingType = "opentelemetry"
-)
+func main() {
+	sherpa.Execute(func() error {
+		var (
+			err error
+			p   = helper.Properties{Logger: bard.NewLogger(os.Stdout)}
+		)
 
-func getConfigurationFileFromBindings(binds libcnb.Bindings) string {
-	var path string
-	for _, bind := range bindings.Resolve(binds, bindings.OfType(BindingType)) {
-		for k := range bind.Secret {
-			if p, ok := bind.SecretFilePath(k); ok {
-				path = p
-			}
+		p.Bindings, err = libcnb.NewBindingsFromEnvironment()
+		if err != nil {
+			return fmt.Errorf("unable to read bindings from environment\n%w", err)
 		}
-	}
-	return path
+
+		return sherpa.Helpers(map[string]sherpa.ExecD{
+			"properties": p,
+		})
+	})
 }

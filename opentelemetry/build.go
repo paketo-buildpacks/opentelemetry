@@ -48,13 +48,21 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 	if _, ok, err := pr.Resolve("opentelemetry-java"); err != nil {
 		return libcnb.BuildResult{}, fmt.Errorf("unable to resolve opentelemetry-java plan entry\n%w", err)
 	} else if ok {
-		agentDependency, err := dr.Resolve("opentelemetry-java", "")
+		dep, err := dr.Resolve("opentelemetry-java", "")
 		if err != nil {
 			return libcnb.BuildResult{}, fmt.Errorf("unable to find dependency\n%w", err)
 		}
 
-		result.Layers = append(result.Layers, NewJavaAgent(agentDependency, dc, b.Logger))
+		ja, be := NewJavaAgent(context.Buildpack.Path, dep, dc)
+		ja.Logger = b.Logger
+		result.Layers = append(result.Layers, ja)
+		result.BOM.Entries = append(result.BOM.Entries, be)
 	}
+
+	h, be := libpak.NewHelperLayer(context.Buildpack, "properties")
+	h.Logger = b.Logger
+	result.Layers = append(result.Layers, h)
+	result.BOM.Entries = append(result.BOM.Entries, be)
 
 	return result, nil
 }

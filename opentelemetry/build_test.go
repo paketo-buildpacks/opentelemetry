@@ -23,6 +23,7 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/sclevine/spec"
 
+	"github.com/paketo-buildpacks/libpak"
 	"github.com/paketo-buildpacks/opentelemetry/opentelemetry"
 )
 
@@ -39,7 +40,7 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 			"dependencies": []map[string]interface{}{
 				{
 					"id":      "opentelemetry-java",
-					"version": "1.15.0",
+					"version": "1.18.0",
 					"stacks":  []interface{}{"test-stack-id"},
 				},
 			},
@@ -50,8 +51,14 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 		result, err := opentelemetry.Build{}.Build(ctx)
 		Expect(err).NotTo(HaveOccurred())
 
-		Expect(result.Layers).To(HaveLen(1))
+		Expect(result.Layers).To(HaveLen(2))
 		Expect(result.Layers[0].Name()).To(Equal("opentelemetry-java"))
+		Expect(result.Layers[1].Name()).To(Equal("helper"))
+		Expect(result.Layers[1].(libpak.HelperLayerContributor).Names).To(Equal([]string{"properties"}))
+
+		Expect(result.BOM.Entries).To(HaveLen(2))
+		Expect(result.BOM.Entries[0].Name).To(Equal("opentelemetry-java"))
+		Expect(result.BOM.Entries[1].Name).To(Equal("helper"))
 	})
 
 	it("contributes Java agent API >= 0.7", func() {
@@ -60,10 +67,10 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 			"dependencies": []map[string]interface{}{
 				{
 					"id":      "opentelemetry-java",
-					"version": "1.15.0",
+					"version": "1.18.0",
 					"stacks":  []interface{}{"test-stack-id"},
-					"cpes":    []interface{}{"cpe:2.3:a:open-telemetry:opentelemetry-java-agent:1.15.0:*:*:*:*:*:*:*"},
-					"purl":    "pkg:generic/opentelemetry-java@1.15.0",
+					"cpes":    []interface{}{"cpe:2.3:a:open-telemetry:opentelemetry-java-agent:1.18.0:*:*:*:*:*:*:*"},
+					"purl":    "pkg:generic/opentelemetry-java@1.18.0",
 				},
 			},
 		}
@@ -73,8 +80,14 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 		result, err := opentelemetry.Build{}.Build(ctx)
 		Expect(err).NotTo(HaveOccurred())
 
-		Expect(result.Layers).To(HaveLen(1))
+		Expect(result.Layers).To(HaveLen(2))
 		Expect(result.Layers[0].Name()).To(Equal("opentelemetry-java"))
+		Expect(result.Layers[1].Name()).To(Equal("helper"))
+		Expect(result.Layers[1].(libpak.HelperLayerContributor).Names).To(Equal([]string{"properties"}))
+
+		Expect(result.BOM.Entries).To(HaveLen(2))
+		Expect(result.BOM.Entries[0].Name).To(Equal("opentelemetry-java"))
+		Expect(result.BOM.Entries[1].Name).To(Equal("helper"))
 	})
 
 }
