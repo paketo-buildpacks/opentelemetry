@@ -44,9 +44,23 @@ Picked up JAVA_TOOL_OPTIONS: -Djava.security.properties=/layers/paketo-buildpack
 [otel.javaagent 2022-09-18 19:10:16:624 +0000] [main] INFO io.opentelemetry.javaagent.tooling.VersionLogger - opentelemetry-javaagent - version: 1.18.0
 ```
 
+A binding can be used to pass configuration to the OpenTelemetry Agent via a property file.
+
+```shell
+docker run --rm -p 8080:8080 --name demo \
+  -v /workspaces/opentelemetry/test/bindings/opentelemetry:/bindings/opentelemetry \
+  -e SERVICE_BINDING_ROOT=/bindings \
+  demo
+```
+
 ## Usage
 
 Once you enable the OpenTelemetry buildpack, you can configure it at run-time via environment variables, as described in the [project documentation](https://opentelemetry.io/docs/instrumentation/java/automatic/agent-config/) or via a configuration file provided to the container via a binding.
+
+By default, the following configuration is applied to keep the OpenTelemetry Java Agent and the metrics exporter disabled unless you explicitly enable it at run time.
+
+* `OTEL_JAVAAGENT_ENABLED`=false
+* `OTEL_METRICS_EXPORTER`=none
 
 ## Bindings
 

@@ -38,7 +38,7 @@ func (p Properties) Execute() (map[string]string, error) {
 		return nil, nil
 	}
 
-	p.Logger.Info("Configuring OpenTelemetry properties")
+	p.Logger.Info("Configuring OpenTelemetry Agent properties")
 
 	e := make(map[string]string, len(b.Secret))
 	for k, v := range b.Secret {

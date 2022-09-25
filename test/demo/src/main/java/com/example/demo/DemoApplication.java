@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +20,10 @@ public class DemoApplication {
 	RouterFunction<ServerResponse> routerFunction() {
 		return RouterFunctions.route()
 			.GET("/", request -> ServerResponse.ok().bodyValue("Hello, OpenTelemetry!"))
+			.GET("/config", request -> ServerResponse.ok().bodyValue(List.of(
+				"OTEL_JAVAAGENT_ENABLED=" + System.getenv("OTEL_JAVAAGENT_ENABLED"),
+				"OTEL_METRICS_EXPORTER=" + System.getenv("OTEL_METRICS_EXPORTER")
+			)))
 			.build();
 	}
 
