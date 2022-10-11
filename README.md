@@ -50,12 +50,29 @@ Picked up JAVA_TOOL_OPTIONS: -Djava.security.properties=/layers/paketo-buildpack
 [otel.javaagent 2022-09-18 19:10:16:624 +0000] [main] INFO io.opentelemetry.javaagent.tooling.VersionLogger - opentelemetry-javaagent - version: 1.18.0
 ```
 
-A binding can be used to pass configuration to the OpenTelemetry Agent via a property file.
+A binding can be used to pass configuration to the OpenTelemetry Agent in two ways.
+
+### OpenTelemetry configuration via a config tree
+
+You can mount the OpenTelemetry configuration as a config tree via a binding. That is useful, for instance, when the configuration is provided as key/value pairs in a Kubernetes `Secret` object.
 
 ```shell
 docker run --rm -p 8080:8080 --name demo \
-  -v /workspaces/opentelemetry/test/bindings/opentelemetry:/bindings/opentelemetry \
+  -v /workspaces/opentelemetry/test/bindings_config_tree/opentelemetry:/bindings/opentelemetry \
   -e SERVICE_BINDING_ROOT=/bindings \
+  -e OTEL_JAVAAGENT_ENABLED=true \
+  demo
+```
+
+### OpenTelemetry configuration via a config file (TO BE IMPLEMENTED)
+
+You can mount the OpenTelemetry configuration as a config file via a binding. That is useful, for instance, when the configuration is provided as a file within a Kubernetes `Secret` object or when using Docker.
+
+```shell
+docker run --rm -p 8080:8080 --name demo \
+  -v /workspaces/opentelemetry/test/bindings_config_file/opentelemetry:/bindings/opentelemetry \
+  -e SERVICE_BINDING_ROOT=/bindings \
+  -e OTEL_JAVAAGENT_ENABLED=true \
   demo
 ```
 

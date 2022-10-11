@@ -37,15 +37,21 @@ func testProperties(t *testing.T, context spec.G, it spec.S) {
 		Expect(p.Execute()).To(BeNil())
 	})
 
-	it("contributes properties if binding exists", func() {
+	it("contributes properties if binding exists as a config tree", func() {
 		p.Bindings = libcnb.Bindings{
 			{
-				Name:   "test-binding",
-				Type:   "OpenTelemetry",
-				Secret: map[string]string{"otel.test.my-key": "test-value"},
+				Name: "test-binding",
+				Type: "OpenTelemetry",
+				Secret: map[string]string{
+					"otel.test.my-key":            "test-value",
+					"otel.testagain.my-other-key": "other test value",
+				},
 			},
 		}
 
-		Expect(p.Execute()).To(Equal(map[string]string{"OTEL_TEST_MY_KEY": "test-value"}))
+		Expect(p.Execute()).To(Equal(map[string]string{
+			"OTEL_TEST_MY_KEY":            "test-value",
+			"OTEL_TESTAGAIN_MY_OTHER_KEY": "other test value",
+		}))
 	})
 }
