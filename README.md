@@ -18,6 +18,12 @@ At run time, the buildpack will do the following for Java applications:
 
 ## Testing
 
+First, compile the buildpack as follows.
+
+```shell
+scripts/build.sh
+```
+
 Given a Java application, you can package it by running the following command from the current folder.
 
 ```shell
