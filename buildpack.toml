@@ -2,7 +2,7 @@ api = "0.7"
 
 [buildpack]
   description = "A Cloud Native Buildpack that contributes and configures the OpenTelemetry Agent"
-  homepage = "https://github.com/ThomasVitale/buildpacks-opentelemetry"
+  homepage = "https://github.com/paketo-buildpacks/opentelemetry"
   id = "paketo-buildpacks/opentelemetry"
   keywords = ["java", "opentelemetry"]
   name = "Paketo OpenTelemetry Buildpack"
@@ -11,7 +11,7 @@ api = "0.7"
 
   [[buildpack.licenses]]
     type = "Apache-2.0"
-    uri = "https://github.com/ThomasVitale/buildpacks-opentelemetry/blob/main/LICENSE"
+    uri = "https://github.com/paketo-buildpacks/opentelemetry/blob/main/LICENSE"
 
 [metadata]
   include-files = ["LICENSE", "NOTICE", "README.md", "bin/build", "bin/detect", "bin/main", "buildpack.toml"]

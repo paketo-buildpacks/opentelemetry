@@ -28,15 +28,19 @@ import (
 )
 
 type JavaAgent struct {
+	BuildpackPath    string
 	LayerContributor libpak.DependencyLayerContributor
 	Logger           bard.Logger
 }
 
-func NewJavaAgent(dependency libpak.BuildpackDependency, cache libpak.DependencyCache, logger bard.Logger) JavaAgent {
-	contrib, _ := libpak.NewDependencyLayer(dependency, cache, libcnb.LayerTypes{
+func NewJavaAgent(buildpackPath string, dependency libpak.BuildpackDependency, cache libpak.DependencyCache) (JavaAgent, libcnb.BOMEntry) {
+	contributor, entry := libpak.NewDependencyLayer(dependency, cache, libcnb.LayerTypes{
 		Launch: true,
 	})
-	return JavaAgent{LayerContributor: contrib, Logger: logger}
+	return JavaAgent{
+		BuildpackPath:    buildpackPath,
+		LayerContributor: contributor,
+	}, entry
 }
 
 func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
@@ -45,12 +49,14 @@ func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	return j.LayerContributor.Contribute(layer, func(artifact *os.File) (libcnb.Layer, error) {
 		j.Logger.Bodyf("Copying to %s", layer.Path)
 
-		file := filepath.Join(layer.Path, filepath.Base(j.LayerContributor.Dependency.URI))
+		file := filepath.Join(layer.Path, filepath.Base(artifact.Name()))
 		if err := sherpa.CopyFile(artifact, file); err != nil {
-			return libcnb.Layer{}, fmt.Errorf("unable to copy artifact to %s\n%w", file, err)
+			return libcnb.Layer{}, fmt.Errorf("unable to copy %s to %s\n%w", artifact.Name(), file, err)
 		}
 
 		layer.LaunchEnvironment.Appendf("JAVA_TOOL_OPTIONS", " ", "-javaagent:%s", file)
+		layer.LaunchEnvironment.Default("OTEL_JAVAAGENT_ENABLED", "false")
+		layer.LaunchEnvironment.Default("OTEL_METRICS_EXPORTER", "none")
 
 		return layer, nil
 	})
