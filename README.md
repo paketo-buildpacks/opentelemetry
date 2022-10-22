@@ -33,6 +33,59 @@ When using a binding to configure the agent, properties are expected to be passe
 where each key is the name of a file and the value its content. Keys can follow the environment variable format or the
 system property format, as described in the [project documentation](https://opentelemetry.io/docs/instrumentation/java/automatic/agent-config/).
 
+## Testing
+
+First, compile the buildpack as follows.
+
+```shell
+scripts/build.sh
+```
+
+Given a Java application, you can package it by running the following command from the current folder.
+
+```shell
+pack build demo \
+  --path test/demo \
+  --buildpack paketo-buildpacks/java \
+  --buildpack . \
+  --builder paketobuildpacks/builder:base \
+  --verbose --trust-builder \
+  -e BP_JVM_VERSION=17 -e BP_OPENTELEMETRY_ENABLED=true
+```
+
+Next, run it as follows.
+
+```shell
+docker run --rm -p 8080:8080 -e OTEL_JAVAAGENT_ENABLED=true demo
+```
+
+Check the logs and verify the OpenTelemetry Agent was included.
+
+```log
+Picked up JAVA_TOOL_OPTIONS: -Djava.security.properties=/layers/paketo-buildpacks_bellsoft-liberica/java-security-properties/java-security.properties -XX:+ExitOnOutOfMemoryError -javaagent:/layers/paketo-buildpacks_opentelemetry/opentelemetry-java/opentelemetry-javaagent.jar -XX:ActiveProcessorCount=4 -XX:MaxDirectMemorySize=10M -Xmx4036227K -XX:MaxMetaspaceSize=98496K -XX:ReservedCodeCacheSize=240M -Xss1M -XX:+UnlockDiagnosticVMOptions -XX:NativeMemoryTracking=summary -XX:+PrintNMTStatistics
+
+[otel.javaagent 2022-10-22 13:46:02:983 +0000] [main] INFO io.opentelemetry.javaagent.tooling.VersionLogger - opentelemetry-javaagent - version: 1.19.1
+```
+
+You can mount the OpenTelemetry configuration as a config tree via a binding. That is useful, for instance, when the configuration is provided as key/value pairs in a Kubernetes `Secret` object.
+
+```shell
+docker run --rm -p 8080:8080 --name demo \
+  -v /workspaces/opentelemetry/test/bindings_config_tree/opentelemetry:/bindings/opentelemetry \
+  -e SERVICE_BINDING_ROOT=/bindings \
+  -e OTEL_JAVAAGENT_ENABLED=true \
+  demo
+```
+
+You can send a request to the application and verify that the configuration provided via the binding
+has been applied correctly.
+
+```shell
+curl localhost:8080/config
+
+["OTEL_JAVAAGENT_ENABLED=true","OTEL_METRICS_EXPORTER=otlp","OTEL_SERVICE_NAME=testname"]
+```
+
 ## Bindings
 
 The buildpack optionally accepts the following bindings:
