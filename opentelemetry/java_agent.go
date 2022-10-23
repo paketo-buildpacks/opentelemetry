@@ -28,7 +28,6 @@ import (
 )
 
 type JavaAgent struct {
-	BuildpackPath    string
 	LayerContributor libpak.DependencyLayerContributor
 	Logger           bard.Logger
 }
@@ -38,7 +37,6 @@ func NewJavaAgent(buildpackPath string, dependency libpak.BuildpackDependency, c
 		Launch: true,
 	})
 	return JavaAgent{
-		BuildpackPath:    buildpackPath,
 		LayerContributor: contributor,
 	}, entry
 }

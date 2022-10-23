@@ -29,9 +29,7 @@ By default, the following configuration is applied to the OpenTelemetry Java Age
 * `OTEL_JAVAAGENT_ENABLED=false`
 * `OTEL_METRICS_EXPORTER=none`
 
-When using a binding to configure the agent, properties are expected to be passed via a config tree format,
-where each key is the name of a file and the value its content. Keys can follow the environment variable format or the
-system property format, as described in the [project documentation](https://opentelemetry.io/docs/instrumentation/java/automatic/agent-config/).
+When using a [binding](https://paketo.io/docs/howto/configuration/#bindings), key/values map directly to OpenTelemetry Java agent configuration properties. Keys can follow the environment variable format or the system property format, as described in the [project documentation](https://opentelemetry.io/docs/instrumentation/java/automatic/agent-config/).
 
 ## Bindings
 
@@ -41,7 +39,7 @@ The buildpack optionally accepts the following bindings:
 
 | Key                   | Value   | Description                                                                                       |
 | --------------------- | ------- | ------------------------------------------------------------------------------------------------- |
-| `<otel-property-key>` | `<otel-property-value>` | Properties are expected to be passed via a config tree format, where each key is the name of a file and the value its content. That's the default behavior when passing key/value pairs via a Kubernetes Secret. Keys can follow the environment variable format or the system property format, as described in the [project documentation](https://opentelemetry.io/docs/instrumentation/java/automatic/agent-config/).  |
+| `<otel-property-key>` | `<otel-property-value>` | Binding key/values map directly to OpenTelemetry Java agent configuration properties. Keys can follow the environment variable format or the system property format, as described in the [project documentation](https://opentelemetry.io/docs/instrumentation/java/automatic/agent-config/). |
 
 ### Type: `dependency-mapping`
 
