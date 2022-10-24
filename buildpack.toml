@@ -4,10 +4,10 @@ api = "0.7"
   description = "A Cloud Native Buildpack that contributes and configures the OpenTelemetry Agent"
   homepage = "https://github.com/paketo-buildpacks/opentelemetry"
   id = "paketo-buildpacks/opentelemetry"
-  keywords = ["java", "opentelemetry"]
+  keywords = ["java", "apm", "opentelemetry"]
   name = "Paketo OpenTelemetry Buildpack"
   sbom-formats = ["application/vnd.cyclonedx+json", "application/vnd.syft+json"]
-  version = "0.0.1"
+  version = "{{.version}}"
 
   [[buildpack.licenses]]
     type = "Apache-2.0"
