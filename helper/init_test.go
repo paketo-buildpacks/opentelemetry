@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package main
+package helper_test
 
 import (
-	"os"
+	"testing"
 
-	"github.com/paketo-buildpacks/libpak"
-	"github.com/paketo-buildpacks/libpak/bard"
-	"github.com/paketo-buildpacks/opentelemetry/opentelemetry"
+	"github.com/sclevine/spec"
+	"github.com/sclevine/spec/report"
 )
 
-func main() {
-	libpak.Main(
-		opentelemetry.Detect{},
-		opentelemetry.Build{Logger: bard.NewLogger(os.Stdout)},
-	)
+func TestUnit(t *testing.T) {
+	suite := spec.New("helper", spec.Report(report.Terminal{}))
+	suite("Properties", testProperties)
+	suite.Run(t)
 }

@@ -18,17 +18,15 @@ package opentelemetry_test
 
 import (
 	"fmt"
-	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
 
-	"github.com/ThomasVitale/buildpacks-opentelemetry/opentelemetry"
 	"github.com/buildpacks/libcnb"
 	. "github.com/onsi/gomega"
 	"github.com/paketo-buildpacks/libpak"
-	"github.com/paketo-buildpacks/libpak/bard"
+	"github.com/paketo-buildpacks/opentelemetry/opentelemetry"
 	"github.com/sclevine/spec"
 )
 
@@ -62,8 +60,7 @@ func testJavaAgent(t *testing.T, context spec.G, it spec.S) {
 		}
 		dc := libpak.DependencyCache{CachePath: "testdata"}
 
-		j := opentelemetry.NewJavaAgent(dep, dc, bard.NewLogger(io.Discard))
-
+		j, _ := opentelemetry.NewJavaAgent(ctx.Buildpack.Path, dep, dc)
 		layer, err := ctx.Layers.Layer("test-layer")
 		Expect(err).NotTo(HaveOccurred())
 
@@ -75,5 +72,7 @@ func testJavaAgent(t *testing.T, context spec.G, it spec.S) {
 		Expect(layer.LaunchEnvironment["JAVA_TOOL_OPTIONS.delim"]).To(Equal(" "))
 		Expect(layer.LaunchEnvironment["JAVA_TOOL_OPTIONS.append"]).To(Equal(fmt.Sprintf("-javaagent:%s",
 			filepath.Join(layer.Path, "stub-opentelemetry-java-agent.jar"))))
+		Expect(layer.LaunchEnvironment["OTEL_JAVAAGENT_ENABLED.default"]).To(Equal("false"))
+		Expect(layer.LaunchEnvironment["OTEL_METRICS_EXPORTER.default"]).To(Equal("none"))
 	})
 }
