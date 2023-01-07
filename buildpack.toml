@@ -5,7 +5,7 @@ api = "0.7"
   homepage = "https://github.com/paketo-buildpacks/opentelemetry"
   id = "paketo-buildpacks/opentelemetry"
   keywords = ["java", "apm", "trace", "opentelemetry"]
-  name = "Paketo OpenTelemetry Buildpack"
+  name = "Paketo Buildpack for OpenTelemetry"
   sbom-formats = ["application/vnd.cyclonedx+json", "application/vnd.syft+json"]
   version = "{{.version}}"
 
