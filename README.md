@@ -2,7 +2,7 @@
 
 ## `gcr.io/paketo-buildpacks/opentelemetry`
 
-The OpenTelemetry Buildpack is a Cloud Native Buildpack that contributes and configures the OpenTelemetry Agent.
+The Paketo Buildpack for OpenTelemetry is a Cloud Native Buildpack that contributes and configures the OpenTelemetry Agent.
 
 ## Behavior
 
