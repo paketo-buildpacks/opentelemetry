@@ -24,14 +24,14 @@ api = "0.7"
     name = "BP_OPENTELEMETRY_ENABLED"
 
   [[metadata.dependencies]]
-    cpes = ["cpe:2.3:a:open-telemetry:opentelemetry-java-agent:1.24.0:*:*:*:*:*:*:*"]
+    cpes = ["cpe:2.3:a:open-telemetry:opentelemetry-java-agent:1.25.0:*:*:*:*:*:*:*"]
     id = "opentelemetry-java"
     name = "OpenTelemetry Java Agent"
-    purl = "pkg:generic/opentelemetry-java@1.24.0"
-    sha256 = "eb53af4f4ab00a8364d8b0fa50e0a0b8b72b4571d9c8e6295f6cc4e4e841d833"
+    purl = "pkg:generic/opentelemetry-java@1.25.0"
+    sha256 = "fab04e9685a665a28e096139035df5052fc3ceac017d0482222f2d8d27218a9c"
     stacks = ["io.buildpacks.stacks.bionic", "io.paketo.stacks.tiny", "*"]
-    uri = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.24.0/opentelemetry-javaagent.jar"
-    version = "1.24.0"
+    uri = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.25.0/opentelemetry-javaagent.jar"
+    version = "1.25.0"
 
     [[metadata.dependencies.licenses]]
       type = "Apache-2.0"
