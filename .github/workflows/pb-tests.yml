@@ -178,6 +178,7 @@ jobs:
               env:
                 FORMAT: image
                 PACKAGES: test
+                TTL_SH_PUBLISH: "false"
                 VERSION: ${{ steps.version.outputs.version }}
     unit:
         name: Unit Test
