@@ -54,6 +54,7 @@ func (j JavaAgent) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 
 		layer.LaunchEnvironment.Appendf("JAVA_TOOL_OPTIONS", " ", "-javaagent:%s", file)
 		layer.LaunchEnvironment.Default("OTEL_JAVAAGENT_ENABLED", "false")
+		layer.LaunchEnvironment.Default("OTEL_LOGS_EXPORTER", "none")
 		layer.LaunchEnvironment.Default("OTEL_METRICS_EXPORTER", "none")
 
 		return layer, nil

@@ -73,6 +73,7 @@ func testJavaAgent(t *testing.T, context spec.G, it spec.S) {
 		Expect(layer.LaunchEnvironment["JAVA_TOOL_OPTIONS.append"]).To(Equal(fmt.Sprintf("-javaagent:%s",
 			filepath.Join(layer.Path, "stub-opentelemetry-java-agent.jar"))))
 		Expect(layer.LaunchEnvironment["OTEL_JAVAAGENT_ENABLED.default"]).To(Equal("false"))
+		Expect(layer.LaunchEnvironment["OTEL_LOGS_EXPORTER.default"]).To(Equal("none"))
 		Expect(layer.LaunchEnvironment["OTEL_METRICS_EXPORTER.default"]).To(Equal("none"))
 	})
 }

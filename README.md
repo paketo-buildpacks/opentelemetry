@@ -14,6 +14,7 @@ At build time, the buildpack will do the following for Java applications:
 
 * Contributes the OpenTelemetry Java agent to a layer and configures `$JAVA_TOOL_OPTIONS` to use it.
 * By default, the agent is configured to be disabled (`OTEL_JAVAAGENT_ENABLED=false`).
+* By default, the logs exporting feature of the agent is configured to be disabled (`OTEL_LOGS_EXPORTER=none`).
 * By default, the metrics exporting feature of the agent is configured to be disabled (`OTEL_METRICS_EXPORTER=none`).
 
 At run time, the buildpack will do the following for Java applications:
@@ -27,6 +28,7 @@ Once you enable the OpenTelemetry buildpack at build-time, you can configure it 
 By default, the following configuration is applied to the OpenTelemetry Java Agent at run time.
 
 * `OTEL_JAVAAGENT_ENABLED=false`
+* `OTEL_LOGS_EXPORTER=none`
 * `OTEL_METRICS_EXPORTER=none`
 
 When using a [binding](https://paketo.io/docs/howto/configuration/#bindings), key/values map directly to OpenTelemetry Java agent configuration properties. Keys can follow the environment variable format or the system property format, as described in the [project documentation](https://opentelemetry.io/docs/instrumentation/java/automatic/agent-config/).
