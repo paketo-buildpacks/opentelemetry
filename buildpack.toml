@@ -38,16 +38,16 @@ api = "0.7"
     name = "BP_OPENTELEMETRY_ENABLED"
 
   [[metadata.dependencies]]
-    cpes = ["cpe:2.3:a:open-telemetry:opentelemetry-java-agent:2.13.3:*:*:*:*:*:*:*"]
+    cpes = ["cpe:2.3:a:open-telemetry:opentelemetry-java-agent:2.14.0:*:*:*:*:*:*:*"]
     id = "opentelemetry-java"
     name = "OpenTelemetry Java Agent"
-    purl = "pkg:generic/opentelemetry-java@2.13.3"
-    sha256 = "9ea8f7ed7bfd6171d4a93e9d94d4a036443a9eb17fdebf0501c57bb4d4e87175"
-    source = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/archive/refs/tags/v2.13.3.tar.gz"
-    source-sha256 = "a9c4299de946f352647cb33c3a44f013c6df74ecad4300495d8413fde43ae374"
+    purl = "pkg:generic/opentelemetry-java@2.14.0"
+    sha256 = "16f8e28fa1ddcd56ed85bf633bd1d1fbc78ea7c4cc50e8c5726b2a319f5058c8"
+    source = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/archive/refs/tags/v2.14.0.tar.gz"
+    source-sha256 = "f89285efa498de103c393e9228342a737fb9857c5c7daf759bff0f2dfb073897"
     stacks = ["*"]
-    uri = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.13.3/opentelemetry-javaagent.jar"
-    version = "2.13.3"
+    uri = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.14.0/opentelemetry-javaagent.jar"
+    version = "2.14.0"
 
     [[metadata.dependencies.licenses]]
       type = "Apache-2.0"
