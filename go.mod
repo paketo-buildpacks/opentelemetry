@@ -2,7 +2,7 @@ module github.com/paketo-buildpacks/opentelemetry
 
 go 1.23.0
 
-toolchain go1.23.6
+toolchain go1.23.7
 
 require (
 	github.com/buildpacks/libcnb v1.30.4
