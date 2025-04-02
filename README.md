@@ -1,6 +1,8 @@
 # Paketo Buildpack for OpenTelemetry
 
-## `gcr.io/paketo-buildpacks/opentelemetry`
+
+## Buildpack ID: `paketo-buildpacks/opentelemetry`
+## Registry URLs: `docker.io/paketo-buildpacks/opentelemetry`
 
 The Paketo Buildpack for OpenTelemetry is a Cloud Native Buildpack that contributes and configures the OpenTelemetry Agent.
 
