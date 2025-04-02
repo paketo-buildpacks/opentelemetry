@@ -1,6 +1,5 @@
 # Paketo Buildpack for OpenTelemetry
 
-# Paketo Buildpack for OpenTelemetry
 
 ## Buildpack ID: `paketo-buildpacks/opentelemetry`
 ## Registry URLs: `docker.io/paketo-buildpacks/opentelemetry`
