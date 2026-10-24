@@ -17,8 +17,7 @@
 package opentelemetry_test
 
 import (
-	"fmt"
-	"io/ioutil"
+	"fmt" //nolint:staticcheck // hold off on the BOM migration for now
 	"os"
 	"path/filepath"
 	"testing"
@@ -40,10 +39,10 @@ func testJavaAgent(t *testing.T, context spec.G, it spec.S) {
 	it.Before(func() {
 		var err error
 
-		ctx.Buildpack.Path, err = ioutil.TempDir("", "java-agent-buildpack")
+		ctx.Buildpack.Path, err = os.MkdirTemp("", "java-agent-buildpack")
 		Expect(err).NotTo(HaveOccurred())
 
-		ctx.Layers.Path, err = ioutil.TempDir("", "java-agent-layers")
+		ctx.Layers.Path, err = os.MkdirTemp("", "java-agent-layers")
 		Expect(err).NotTo(HaveOccurred())
 	})
 
