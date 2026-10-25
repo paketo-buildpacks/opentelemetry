@@ -28,8 +28,8 @@ api = "0.7"
     uri = "https://github.com/paketo-buildpacks/opentelemetry/blob/main/LICENSE"
 
 [metadata]
-  include-files = ["LICENSE", "NOTICE", "README.md", "linux/amd64/bin/build", "linux/amd64/bin/detect", "linux/amd64/bin/main", "linux/amd64/bin/helper", "linux/arm64/bin/build", "linux/arm64/bin/detect", "linux/arm64/bin/main", "linux/arm64/bin/helper", "buildpack.toml"]
-  pre-package = "scripts/build.sh"
+  include-files = ["LICENSE", "NOTICE", "README.md", "linux/amd64/bin/build", "linux/amd64/bin/detect", "linux/amd64/bin/run", "linux/amd64/bin/helper", "linux/arm64/bin/build", "linux/arm64/bin/detect", "linux/arm64/bin/run", "linux/arm64/bin/helper", "buildpack.toml"]
+  pre-package = "scripts/build.sh --target linux/amd64 --target linux/arm64"
 
   [[metadata.configurations]]
     build = true
@@ -38,13 +38,14 @@ api = "0.7"
     name = "BP_OPENTELEMETRY_ENABLED"
 
   [[metadata.dependencies]]
-    cpes = ["cpe:2.3:a:open-telemetry:opentelemetry-java-agent:2.32.0:*:*:*:*:*:*:*"]
+    checksum = "sha256:f787eb6c7f3d18e69a431e108a15278d25ee37f83d68b678f621e063f3988f82"
+    cpe = "cpe:2.3:a:open-telemetry:opentelemetry-java-agent:2.32.0:*:*:*:*:*:*:*"
     id = "opentelemetry-java"
     name = "OpenTelemetry Java Agent"
     purl = "pkg:generic/opentelemetry-java@2.32.0"
     sha256 = "f787eb6c7f3d18e69a431e108a15278d25ee37f83d68b678f621e063f3988f82"
     source = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/archive/refs/tags/v2.32.0.tar.gz"
-    source-sha256 = "9203dc46fcde2ab036d7cb94f5df95bc90142ad5d32944d282e44bce1061c312"
+    source-checksum = "sha256:9203dc46fcde2ab036d7cb94f5df95bc90142ad5d32944d282e44bce1061c312"
     stacks = ["*"]
     uri = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.32.0/opentelemetry-javaagent.jar"
     version = "2.32.0"
@@ -52,6 +53,11 @@ api = "0.7"
     [[metadata.dependencies.licenses]]
       type = "Apache-2.0"
       uri = "https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/LICENSE"
+
+  [[metadata.dependency-constraints]]
+    constraint = "2.*"
+    id = "opentelemetry-java"
+    patches = 2
 
 [[stacks]]
   id = "*"

@@ -34,6 +34,10 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 		ctx libcnb.BuildContext
 	)
 
+	it.Before(func() {
+		t.Setenv("BP_ARCH", "amd64")
+	})
+
 	it("contributes Java agent API <= 0.6", func() {
 		ctx.Plan.Entries = append(ctx.Plan.Entries, libcnb.BuildpackPlanEntry{Name: "opentelemetry-java"})
 		ctx.Buildpack.Metadata = map[string]interface{}{
@@ -56,9 +60,9 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 		Expect(result.Layers[1].Name()).To(Equal("helper"))
 		Expect(result.Layers[1].(libpak.HelperLayerContributor).Names).To(Equal([]string{"properties"}))
 
-		Expect(result.BOM.Entries).To(HaveLen(2))
-		Expect(result.BOM.Entries[0].Name).To(Equal("opentelemetry-java"))
-		Expect(result.BOM.Entries[1].Name).To(Equal("helper"))
+		Expect(result.BOM.Entries).To(HaveLen(2))                          //nolint:staticcheck // hold off on the BOM migration for now
+		Expect(result.BOM.Entries[0].Name).To(Equal("opentelemetry-java")) //nolint:staticcheck // hold off on the BOM migration for now
+		Expect(result.BOM.Entries[1].Name).To(Equal("helper"))             //nolint:staticcheck // hold off on the BOM migration for now
 	})
 
 	it("contributes Java agent API >= 0.7", func() {
@@ -85,9 +89,9 @@ func testBuild(t *testing.T, context spec.G, it spec.S) {
 		Expect(result.Layers[1].Name()).To(Equal("helper"))
 		Expect(result.Layers[1].(libpak.HelperLayerContributor).Names).To(Equal([]string{"properties"}))
 
-		Expect(result.BOM.Entries).To(HaveLen(2))
-		Expect(result.BOM.Entries[0].Name).To(Equal("opentelemetry-java"))
-		Expect(result.BOM.Entries[1].Name).To(Equal("helper"))
+		Expect(result.BOM.Entries).To(HaveLen(2))                          //nolint:staticcheck // hold off on the BOM migration for now
+		Expect(result.BOM.Entries[0].Name).To(Equal("opentelemetry-java")) //nolint:staticcheck // hold off on the BOM migration for now
+		Expect(result.BOM.Entries[1].Name).To(Equal("helper"))             //nolint:staticcheck // hold off on the BOM migration for now
 	})
 
 }
